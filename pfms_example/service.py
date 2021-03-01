@@ -14,6 +14,13 @@ class PersonService(PfRequestResponse):
         pfs_crud.save(person)
         return self.json_data_response(person, PersonDetailsDto())
 
+    def update(self, id):
+        person = self.get_by_id(id)
+        self.check_empty_value_raise_exception(person, "Invalid Entity")
+        person = self.json_request_process(PersonCreateDto(), person)
+        pfs_crud.save(person)
+        return self.json_data_response(person, PersonDetailsDto())
+
     def get_by_id(self, id:int):
         return Person.query.filter_by(id=id).first()
 

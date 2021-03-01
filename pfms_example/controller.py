@@ -17,7 +17,7 @@ def create():
 @pfms_example.route("/update/<int:id>", methods=['POST'])
 @pfms_create(request_body=PersonCreateDto, response_obj=PersonDetailsDto)
 def update(id:int):
-    pass
+    return person_service.update(id)
 
 
 @pfms_example.route("/list", methods=['GET'])
