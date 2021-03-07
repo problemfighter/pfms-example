@@ -1,5 +1,5 @@
 from flask import Blueprint
-from pfms.swagger.pfms_swagger_decorator import pfms_create, pfms_details, pfms_delete
+from pfms.swagger.pfms_swagger_decorator import pfms_create, pfms_details, pfms_delete, pfms_pagination_list
 from pfms_example.dto.person_create_dto import PersonCreateDto
 from pfms_example.dto.person_details_dto import PersonDetailsDto
 from pfms_example.service import PersonService
@@ -21,8 +21,9 @@ def update(id:int):
 
 
 @pfms_example.route("/list", methods=['GET'])
+@pfms_pagination_list(response_obj=PersonDetailsDto)
 def list():
-    pass
+    return person_service.list()
 
 
 @pfms_example.route("/details/<int:id>", methods=['GET'])

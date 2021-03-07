@@ -33,3 +33,6 @@ class PersonService(PfRequestResponse):
         self.check_empty_value_raise_exception(person, "Invalid Entity")
         pfs_crud.delete(person)
         return self.success("Successfully Deleted")
+
+    def list(self):
+        pass
