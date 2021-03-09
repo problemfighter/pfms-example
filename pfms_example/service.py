@@ -35,4 +35,5 @@ class PersonService(PfRequestResponse):
         return self.success("Successfully Deleted")
 
     def list(self):
-        pass
+       person_list = self.add_pagination(Person.query)
+       return self.json_pagination_response(person_list, PersonDetailsDto())
