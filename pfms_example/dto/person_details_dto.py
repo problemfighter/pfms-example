@@ -14,7 +14,7 @@ class PersonDetailsDto(PfBaseSchema):
     updated = auto_field()
     uuid = auto_field()
 
-    identifier = fields.String(required=True, error_messages={"required": "Please enter email."})
+    identifier = fields.String(required=True, error_messages={"required": "Please enter identifier."})
     password = fields.String(required=True, error_messages={"required": "Please enter password."})
     firstName = fields.String(required=True, error_messages={"required": "Please enter first name."})
     lastName = fields.String()
