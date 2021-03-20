@@ -32,8 +32,8 @@ class PersonService(PfRequestResponse):
         person = self.get_by_id(id)
         self.check_empty_value_raise_exception(person, "Invalid Entity")
         pfs_crud.delete(person)
-        return self.success("Successfully Deleted")
+        return self.request().success("Successfully Deleted")
 
     def list(self):
-       person_list = self.add_pagination(Person.query)
+       person_list = self.request().add_pagination(Person.query)
        return self.json_pagination_response(person_list, PersonDetailsDto())
