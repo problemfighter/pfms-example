@@ -1,6 +1,6 @@
 from pf_sqlalchemy.crud.pfs_rest_helper_service import PfsRestHelperService
-from pfrf_example.dto import PersonCreateDto, PersonUpdateDto, PersonDetailsDto
-from pfrf_example.model import Person
+from pfrf_example.dto.person_dto import PersonCreateDto, PersonUpdateDto, PersonDetailsDto
+from pfrf_example.model.person import Person
 
 
 pfs_rest_helper_service = PfsRestHelperService(Person)

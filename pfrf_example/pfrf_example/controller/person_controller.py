@@ -1,7 +1,7 @@
 from flask import Blueprint
 from pfms.swagger.pfms_swagger_decorator import pfms_create, pfms_details, pfms_pagination_sort_search_list, pfms_restore, pfms_delete
-from pfrf_example.dto import PersonCreateDto, PersonDetailsDto, PersonUpdateDto
-from pfrf_example.service import PersonService
+from pfrf_example.dto.person_dto import PersonCreateDto, PersonDetailsDto, PersonUpdateDto
+from pfrf_example.service.person_service import PersonService
 
 
 person_controller = Blueprint("person_controller", __name__, url_prefix="/api/v1/person")
