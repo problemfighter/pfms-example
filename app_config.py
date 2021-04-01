@@ -11,5 +11,8 @@ class AppConfig(PFRFAppConfigInterface):
     def register_model(self, flask_app):
         pfrf_example_registry.register_model(flask_app)
 
-    def register_env_config(self, env) -> str:
-        pass
+    def register_env_config(self, env, flask_app) -> str:
+        if env and str(env) == 'prod':
+            return 'application.config.prod_config.ProdConfiguration'
+        else:
+            return 'application.config.dev_config.DevConfiguration'
