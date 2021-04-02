@@ -12,6 +12,7 @@
     "react-mui-ui": "^0.1.0",
     "react-scripts": "^4.0.3",
     "tm-react": "^0.1.0",
+    "react-material-app": "^0.0.1",
     "typescript": "4.2.3"
   },
   "scripts": {

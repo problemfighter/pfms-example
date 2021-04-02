@@ -7,8 +7,7 @@ class AuthenticationService(PfRequestResponse):
     def navigation(self):
         return [
             self._make_nav("Dashboard", "dashboard", "dashboard", "/dashboard"),
-            self._make_nav("Channel", "dashboard", "channel", "/channel"),
-            self._make_nav("Site", "dashboard", "site", "/site"),
+            self._make_nav("Person", "person", "person", "/person"),
         ]
 
     def _make_nav(self, display_name, icon, name, url):

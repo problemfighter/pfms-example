@@ -2,6 +2,7 @@ import React from 'react';
 import TRLayoutInfoData from "tm-react/src/artifacts/data/view/tr-layout-info-data";
 import PrivateLayout from "react-material-app/src/view/layouts/private-layout";
 import URLMapping from "react-material-app/src/config/url-mapping";
+import PersonUrlMapping from "../view/person/person-url-mapping";
 
 
 export default class PFRFUrlMapping extends URLMapping {
@@ -12,6 +13,8 @@ export default class PFRFUrlMapping extends URLMapping {
         let privateLayoutInfo: TRLayoutInfoData = new TRLayoutInfoData();
         privateLayoutInfo = new TRLayoutInfoData();
         privateLayoutInfo.layout = PrivateLayout;
+
+        privateLayoutInfo = PersonUrlMapping.privateUrlMappings(privateLayoutInfo);
 
         pageWithLayout.push(privateLayoutInfo);
         return pageWithLayout
