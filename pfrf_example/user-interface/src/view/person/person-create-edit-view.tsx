@@ -18,6 +18,7 @@ import {
 import {TrUtil} from "tm-react/src/artifacts/util/tr-util";
 import PersonUrlMapping from "./person-url-mapping";
 import PersonConfig from "./person-config";
+import {TrFormDefinitionData} from "tm-react/src/artifacts/data/tr-form-definition-data";
 
 
 interface Props extends TRProps {
@@ -35,6 +36,26 @@ class State extends TRComponentState{
 export default  class PersonCreateEditView extends TRComponent<Props, State> {
 
     state: State = new State();
+
+    constructor(props: Props) {
+        super(props);
+        this.addFormDefinition("identifier", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter Username",
+        }));
+        this.addFormDefinition("password", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter Password",
+        }));
+        this.addFormDefinition("firstName", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter First Name",
+        }));
+        this.addFormDefinition("email", new TrFormDefinitionData({
+            required: true,
+            errorMessage: "Please Enter Email",
+        }));
+    }
 
     componentDidMount() {
         this.showRedirectMessage();
@@ -116,8 +137,11 @@ export default  class PersonCreateEditView extends TRComponent<Props, State> {
                     <form onSubmit={(event: any) => { this.onSubmit(event)}} noValidate autoComplete="off">
                         <CardContent>
                             <Grid  container spacing={4}>
-                                <Grid item xs={5} ><TextField {...this.handleInputDataChange("firstName")}  label="First Name" fullWidth /></Grid>
-                                <Grid item xs={5} ><TextField {...this.handleInputDataChange("lastName")}  label="Last Name" fullWidth /></Grid>
+                                <Grid item xs={6} ><TextField {...this.handleInputDataChange("firstName")}  label="First Name" fullWidth /></Grid>
+                                <Grid item xs={6} ><TextField {...this.handleInputDataChange("lastName")}  label="Last Name" fullWidth /></Grid>
+                                <Grid item xs={6} ><TextField {...this.handleInputDataChange("email")} type="email"  label="Email" fullWidth /></Grid>
+                                <Grid item xs={6} ><TextField {...this.handleInputDataChange("identifier")}  label="Username" fullWidth /></Grid>
+                                <Grid item xs={6} ><TextField {...this.handleInputDataChange("password")} type="password"  label="Password" fullWidth /></Grid>
                             </Grid>
                         </CardContent>
                         <CardActions>
