@@ -25,8 +25,10 @@ interface Props extends TRProps {
     listViewData: { [key: string]: any };
 }
 
-const tableHeaderDefinition = TRTableHeaderDataHelper.init("Name", "name", true, "Name", Align.left);
-tableHeaderDefinition.add( "Price", "price", true, "Price", Align.left);
+const tableHeaderDefinition = TRTableHeaderDataHelper.init("First Name", "firstName", true, "First Name", Align.left);
+tableHeaderDefinition.add( "Last Name", "lastName", true, "Last Name", Align.left);
+tableHeaderDefinition.add( "Email", "email", true, "Email", Align.left);
+tableHeaderDefinition.add( "Identifier", "identifier", true, "Identifier", Align.left);
 
 
 
@@ -47,8 +49,8 @@ class PersonListView extends TRComponent<Props, State> {
 
     public loadData(data: object = {}) {
         const _this = this;
-        let commonConditions = ApiUtil.getSortAndPaginationData(this.state);
-        this.postJsonToApi(PersonUrlMapping.API.LIST,  commonConditions,
+        let commonConditions = ApiUtil.getSearchSortAndPaginationData(this.state);
+        this.getToApiByParams(PersonUrlMapping.API.LIST,  commonConditions,
             {
                 callback(response: TRHTTResponse): void {
                     let apiResponse = ApiUtil.processApiResponseAndShowError(response, _this);
@@ -57,9 +59,11 @@ class PersonListView extends TRComponent<Props, State> {
                         list = apiResponse.data;
                     }
 
+                    console.log(apiResponse)
+
                     let totalItem = 0;
-                    if (apiResponse && apiResponse.pagination && apiResponse.pagination.total) {
-                        totalItem = apiResponse.pagination.total;
+                    if (apiResponse && apiResponse.pagination && apiResponse.pagination.totalPage) {
+                        totalItem = apiResponse.pagination.totalPage;
                     }
                     _this.setState({
                         list: list,
@@ -134,7 +138,7 @@ class PersonListView extends TRComponent<Props, State> {
                     </div>
                     <div>
                         <div className={classes.displayInline}>
-                            <TextField placeholder={PersonConfig.NAME_CONSTANT.SEARCH} name="search" onKeyUp={(event: any)=>{ApiUtil.search(event, _this, ["firstName", "lastName"])}}/>
+                            <TextField placeholder={PersonConfig.NAME_CONSTANT.SEARCH} name="search" onKeyUp={(event: any)=>{ApiUtil.search(event, _this)}}/>
                         </div>
                         <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {TrUtil.gotoUrl(_this, PersonUrlMapping.ui.create)}}>{PersonConfig.NAME_CONSTANT.CREATE_BUTTON}</Button>
                         <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {this.loadData()}} >{PersonConfig.NAME_CONSTANT.RELOAD_BUTTON}</Button>
@@ -151,8 +155,10 @@ class PersonListView extends TRComponent<Props, State> {
                         <TableBody>
                             {this.state.list.map((row: any, index:any) => (
                                 <TableRow key={index} hover tabIndex={-1}>
-                                    <TableCell align="left">{row.name}</TableCell>
-                                    <TableCell align="left">{row.price}</TableCell>
+                                    <TableCell align="left">{row.firstName}</TableCell>
+                                    <TableCell align="left">{row.lastName}</TableCell>
+                                    <TableCell align="left">{row.email}</TableCell>
+                                    <TableCell align="left">{row.identifier}</TableCell>
                                     <TableCell align="right">
                                         <CaTableAction actions={this.tableActions(_this, row)}/>
                                     </TableCell>

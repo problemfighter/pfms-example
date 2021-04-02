@@ -106,7 +106,7 @@ export default  class PersonCreateEditView extends TRComponent<Props, State> {
         event.preventDefault();
         const _this = this;
         if (this.validateFormInput()) {
-            this.postJsonToApi(this.state.submitUrl, this.state.formData,
+            this.postJsonDataToApi(this.state.submitUrl, this.state.formData,
                 {
                     callback(response: TRHTTResponse): void {
                         let apiResponse = ApiUtil.processApiResponse(response, _this);
