@@ -110,6 +110,8 @@ export default  class PersonCreateEditView extends TRComponent<Props, State> {
                 {
                     callback(response: TRHTTResponse): void {
                         let apiResponse = ApiUtil.processApiResponse(response, _this);
+                        console.log(response)
+                        console.log(apiResponse)
                         if (apiResponse && apiResponse.status === AppConstant.STATUS_SUCCESS) {
                             _this.successRedirect(PersonUrlMapping.ui.list, apiResponse.message);
                         }else{

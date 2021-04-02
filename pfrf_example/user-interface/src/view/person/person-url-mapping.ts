@@ -6,7 +6,7 @@ const ListView = React.lazy(() => import('./person-list-view'));
 const CreateUpdateView = React.lazy(() => import('./person-create-edit-view'));
 
 const UI_BASE_URL = "/person"
-const API_BASE_URL = "/person"
+const API_BASE_URL = "api/v1/person/"
 
 export default class PersonUrlMapping {
 
@@ -14,12 +14,12 @@ export default class PersonUrlMapping {
     public static readonly API_BASE_URL = "/person"
 
     public static readonly API = {
-        LIST: "XXXXXXXX",
-        CREATE: "XXXXXXXX",
-        UPDATE: "XXXXXXXX",
-        DELETE: "XXXXXXXX",
-        DETAILS: "XXXXXXXX",
-        ACTIVE_INACTIVE: "XXXXXXXX",
+        LIST: API_BASE_URL + "list",
+        CREATE: API_BASE_URL + "create",
+        UPDATE: API_BASE_URL + "update",
+        DELETE: API_BASE_URL + "delete",
+        DETAILS: API_BASE_URL + "details",
+        ACTIVE_INACTIVE: API_BASE_URL + "active-inactive",
     };
 
 
