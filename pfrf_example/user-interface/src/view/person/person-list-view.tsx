@@ -60,12 +60,9 @@ class PersonListView extends TRComponent<Props, State> {
                     if (apiResponse && apiResponse.data) {
                         list = apiResponse.data;
                     }
-
-                    console.log(apiResponse)
-
                     let totalItem = 0;
-                    if (apiResponse && apiResponse.pagination && apiResponse.pagination.totalPage) {
-                        totalItem = apiResponse.pagination.totalPage;
+                    if (apiResponse && apiResponse.pagination && apiResponse.pagination.total) {
+                        totalItem = apiResponse.pagination.total;
                     }
                     _this.setState({
                         list: list,
@@ -82,23 +79,16 @@ class PersonListView extends TRComponent<Props, State> {
         );
     }
 
-    delete(uuid: string){
+    delete(id: any) {
         let _this = this;
-        let commonConditions = {
-            where: {
-                equal: {
-                    uuid :  uuid
-                }
-            }
-        };
-        this.deleteJsonToApi(PersonUrlMapping.API.DELETE,  commonConditions,
+        this.deleteToApi(PersonUrlMapping.API.DELETE + id,
             {
                 callback(response: TRHTTResponse): void {
                     let apiResponse = ApiUtil.processApiResponse(response, _this);
                     if (apiResponse && apiResponse.status === AppConstant.STATUS_SUCCESS) {
                         _this.showSuccessFlash(PersonConfig.NAME_CONSTANT.DELETE_SUCCESS_MESSAGE);
                         _this.loadData();
-                    }else{
+                    } else {
                         ApiUtil.processApiResponseError(apiResponse, _this);
                     }
                 }
@@ -116,13 +106,13 @@ class PersonListView extends TRComponent<Props, State> {
         let tableAction: TRTableActionDataHelper = TRTableActionDataHelper.start(PersonConfig.NAME_CONSTANT.DETAILS_BUTTON, "");
         tableAction.addAction(PersonConfig.NAME_CONSTANT.EDIT_BUTTON).setCallbackData(rowData).setAction({
             click(event: any, onClickData: any): void {
-                component.redirectWithData(PersonUrlMapping.ui.create + "/" + onClickData.uuid, {})
+                component.redirectWithData(PersonUrlMapping.ui.update + "/" + onClickData.id, {})
             }
         });
 
         tableAction.addAction(PersonConfig.NAME_CONSTANT.DELETE_BUTTON).setCallbackData(rowData).setAction({
             click(event: any, onClickData: any): void {
-                component.delete(onClickData.uuid)
+                component.delete(onClickData.id)
             }
         }).addConfirmation();
 

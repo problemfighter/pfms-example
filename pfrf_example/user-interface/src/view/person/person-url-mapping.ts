@@ -17,8 +17,8 @@ export default class PersonUrlMapping {
         LIST: API_BASE_URL + "list",
         CREATE: API_BASE_URL + "create",
         UPDATE: API_BASE_URL + "update",
-        DELETE: API_BASE_URL + "delete",
-        DETAILS: API_BASE_URL + "details",
+        DELETE: API_BASE_URL + "delete/",
+        DETAILS: API_BASE_URL + "details/",
         ACTIVE_INACTIVE: API_BASE_URL + "active-inactive",
     };
 
@@ -28,6 +28,7 @@ export default class PersonUrlMapping {
         list: UI_BASE_URL + "/list",
         create: UI_BASE_URL + "/create",
         update: UI_BASE_URL + "/update",
+        updateWithParams: UI_BASE_URL + "/update/:id",
         details: UI_BASE_URL + "/details",
     };
 
@@ -35,6 +36,7 @@ export default class PersonUrlMapping {
         privateLayoutInfo.addPageInstance(this.ui.index, ListView);
         privateLayoutInfo.addPageInstance(this.ui.list, ListView);
         privateLayoutInfo.addPageInstance(this.ui.create, CreateUpdateView);
+        privateLayoutInfo.addPageInstance(this.ui.updateWithParams, CreateUpdateView);
         return privateLayoutInfo;
     }
 

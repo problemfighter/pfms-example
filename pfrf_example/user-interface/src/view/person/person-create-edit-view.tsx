@@ -59,34 +59,28 @@ export default  class PersonCreateEditView extends TRComponent<Props, State> {
 
     componentDidMount() {
         this.showRedirectMessage();
-        let uuid = ApiUtil.getParamsDataFromRouter(this.props.route, "uuid");
-        if (uuid){
+        let id = ApiUtil.getParamsDataFromRouter(this.props.route, "id");
+        if (id){
             this.setState({
                 isEdit: true,
                 formHeading: PersonConfig.NAME_CONSTANT.UPDATE,
                 buttonLabel: PersonConfig.NAME_CONSTANT.UPDATE_BUTTON,
             });
             this.state.submitUrl = PersonUrlMapping.API.UPDATE;
-            this.loadFormData(uuid);
+            this.loadFormData(id);
         }
     }
 
 
-    loadFormData(uuid: any) {
+    loadFormData(id: any) {
         const _this = this;
-        let filter = {
-            where: {
-                equal: {"uuid": uuid}
-            }
-        };
         let message = PersonConfig.NAME_CONSTANT.INVALID_DATA;
-        this.postJsonToApi(PersonUrlMapping.API.DETAILS, filter,
+        this.getToApi(PersonUrlMapping.API.DETAILS + id,
             {
                 callback(response: TRHTTResponse): void {
                     let apiResponse = ApiUtil.processApiResponseAndShowError(response, _this);
                     if (apiResponse && apiResponse.status === AppConstant.STATUS_SUCCESS && !ApiUtil.isEmptyObject(apiResponse.data)) {
                         let data = apiResponse.data;
-                        data["where"] = filter.where;
                         _this.setState({formData: data})
                     } else {
                         _this.failedRedirect(PersonUrlMapping.ui.list, message);
