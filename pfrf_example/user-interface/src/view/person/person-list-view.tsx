@@ -16,6 +16,7 @@ import {AppConstant} from "react-material-app/src/system/app-constant";
 import {viewCommon} from "react-material-app/src/assets/style-jss";
 import PersonConfig from "./person-config";
 import TrLoadDataPrams from "tm-react/src/artifacts/component/tr-load-data-prams";
+import TrSearch from "react-mui-ui/ui/tr-search";
 
 
 
@@ -50,7 +51,7 @@ class PersonListView extends TRComponent<Props, State> {
 
     public loadData(dataParams: TrLoadDataPrams = new TrLoadDataPrams()) {
         const _this = this;
-        let commonConditions = ApiUtil.getSearchSortAndPaginationData(this.state, dataParams);
+        let commonConditions = ApiUtil.getSearchSortAndPaginationData(this, dataParams);
         this.getToApiByParams(PersonUrlMapping.API.LIST,  commonConditions,
             {
                 callback(response: TRHTTResponse): void {
@@ -139,7 +140,7 @@ class PersonListView extends TRComponent<Props, State> {
                     </div>
                     <div>
                         <div className={classes.displayInline}>
-                            <TextField placeholder={PersonConfig.NAME_CONSTANT.SEARCH} name="search" onKeyUp={(event: any)=>{ApiUtil.search(event, _this)}}/>
+                            <TrSearch parentState={_this} value={_this.state.search}/>
                         </div>
                         <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {TrUtil.gotoUrl(_this, PersonUrlMapping.ui.create)}}>{PersonConfig.NAME_CONSTANT.CREATE_BUTTON}</Button>
                         <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {this.loadData(new TrLoadDataPrams().resetQuery())}} >{PersonConfig.NAME_CONSTANT.RELOAD_BUTTON}</Button>
