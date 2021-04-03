@@ -15,6 +15,7 @@ import CaTableAction from "react-material-app/src/override/ca-table-action";
 import {AppConstant} from "react-material-app/src/system/app-constant";
 import {viewCommon} from "react-material-app/src/assets/style-jss";
 import PersonConfig from "./person-config";
+import TrLoadDataPrams from "tm-react/src/artifacts/component/tr-load-data-prams";
 
 
 
@@ -47,9 +48,9 @@ class PersonListView extends TRComponent<Props, State> {
         this.loadData();
     }
 
-    public loadData(data: object = {}) {
+    public loadData(dataParams: TrLoadDataPrams = new TrLoadDataPrams()) {
         const _this = this;
-        let commonConditions = ApiUtil.getSearchSortAndPaginationData(this.state);
+        let commonConditions = ApiUtil.getSearchSortAndPaginationData(this.state, dataParams);
         this.getToApiByParams(PersonUrlMapping.API.LIST,  commonConditions,
             {
                 callback(response: TRHTTResponse): void {
@@ -141,7 +142,7 @@ class PersonListView extends TRComponent<Props, State> {
                             <TextField placeholder={PersonConfig.NAME_CONSTANT.SEARCH} name="search" onKeyUp={(event: any)=>{ApiUtil.search(event, _this)}}/>
                         </div>
                         <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {TrUtil.gotoUrl(_this, PersonUrlMapping.ui.create)}}>{PersonConfig.NAME_CONSTANT.CREATE_BUTTON}</Button>
-                        <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {this.loadData()}} >{PersonConfig.NAME_CONSTANT.RELOAD_BUTTON}</Button>
+                        <Button className={classes.marginToLeft}  variant="contained" color="primary" onClick={(event:any) => {this.loadData(new TrLoadDataPrams().resetQuery())}} >{PersonConfig.NAME_CONSTANT.RELOAD_BUTTON}</Button>
                     </div>
                 </Paper>
                 <Paper>
