@@ -4,6 +4,7 @@ import React from "react";
 
 const ListView = React.lazy(() => import('./person-list-view'));
 const CreateUpdateView = React.lazy(() => import('./person-create-edit-view'));
+const DetailsView = React.lazy(() => import('./person-details-view'));
 
 const UI_BASE_URL = "/person"
 const API_BASE_URL = "api/v1/person/"
@@ -30,6 +31,7 @@ export default class PersonUrlMapping {
         update: UI_BASE_URL + "/update",
         updateWithParams: UI_BASE_URL + "/update/:id",
         details: UI_BASE_URL + "/details",
+        detailsWithParams: UI_BASE_URL + "/details/:id",
     };
 
     public static privateUrlMappings(privateLayoutInfo: TRLayoutInfoData): TRLayoutInfoData {
@@ -37,6 +39,7 @@ export default class PersonUrlMapping {
         privateLayoutInfo.addPageInstance(this.ui.list, ListView);
         privateLayoutInfo.addPageInstance(this.ui.create, CreateUpdateView);
         privateLayoutInfo.addPageInstance(this.ui.updateWithParams, CreateUpdateView);
+        privateLayoutInfo.addPageInstance(this.ui.detailsWithParams, DetailsView);
         return privateLayoutInfo;
     }
 

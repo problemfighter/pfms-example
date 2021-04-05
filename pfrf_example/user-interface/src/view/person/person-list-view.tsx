@@ -103,7 +103,12 @@ class PersonListView extends TRComponent<Props, State> {
 
 
     tableActions(component: any, rowData: any): Map<string, TRTableActionData> {
-        let tableAction: TRTableActionDataHelper = TRTableActionDataHelper.start(PersonConfig.NAME_CONSTANT.DETAILS_BUTTON, "");
+        let tableAction: TRTableActionDataHelper = TRTableActionDataHelper.instance();
+        tableAction.addAction(PersonConfig.NAME_CONSTANT.DETAILS_BUTTON).setCallbackData(rowData).setAction({
+            click(event: any, onClickData: any): void {
+                component.redirectWithData(PersonUrlMapping.ui.details + "/" + onClickData.id, {})
+            }
+        });
         tableAction.addAction(PersonConfig.NAME_CONSTANT.EDIT_BUTTON).setCallbackData(rowData).setAction({
             click(event: any, onClickData: any): void {
                 component.redirectWithData(PersonUrlMapping.ui.update + "/" + onClickData.id, {})
