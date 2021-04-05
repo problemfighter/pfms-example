@@ -7,7 +7,7 @@ import PersonUrlMapping from "./person-url-mapping";
 import TRHTTResponse from "tm-react/src/artifacts/processor/http/tr-http-response";
 import {ApiUtil} from "react-material-app/src/system/api-util";
 import {AppConstant} from "react-material-app/src/system/app-constant";
-import TrDetailsView from "../../../../../../user-interface/ui-libraries/react-mui-ui/ui/tr-details-view";
+import TrDetailsView from "react-mui-ui/ui/tr-details-view";
 
 
 interface Props extends TRProps {
